@@ -1,19 +1,31 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.asadsq.jbtodoenhancer</id>
-    <name>jb-todo-enhancer</name>
+    <name>TODO Enhancer</name>
     <vendor>asadsq</vendor>
     <description><![CDATA[
-        <p><b>jb-todo-enhancer</b> is a repository that provides a pure template to make it easier to create a new plugin project.</p>
-        <p>The main goal of this template is to speed up the setup phase of plugin development for both new and experienced developers by preconfiguring the project scaffold and CI, linking to the proper documentation pages, and keeping everything organized.</p>
+        <p><b>TODO Enhancer</b> supercharges the way you track TODOs and FIXMEs in your project.</p>
+        <p>On top of IntelliJ's built-in TODO index, it adds a dedicated tool window that understands
+        structured metadata written directly in your comments:</p>
+        <ul>
+            <li><b>Assignees</b> &mdash; <code>// TODO(@asad) fix the parser</code></li>
+            <li><b>Priorities</b> &mdash; <code>// TODO !p1 ship this first</code></li>
+            <li><b>Tags</b> &mdash; <code>// TODO #backend #perf tighten the query</code></li>
+            <li><b>Due dates</b> &mdash; <code>// TODO due:2026-07-10 finalize release notes</code></li>
+        </ul>
+        <p>The tool window lets you sort and filter every TODO by type, priority, assignee, tag, or free
+        text, and jump straight to the code with a double-click. Plain <code>// TODO</code> comments keep
+        working exactly as before &mdash; metadata is entirely optional.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.TodoEnhancerBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.asadsq.jbtodoenhancer.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.asadsq.jbtodoenhancer.startup.MyProjectActivity" />
+        <toolWindow
+            id="TODO Enhancer"
+            anchor="bottom"
+            factoryClass="com.github.asadsq.jbtodoenhancer.toolWindow.TodoEnhancerToolWindowFactory"/>
     </extensions>
 </idea-plugin>

@@ -1,45 +1,67 @@
-# jb-todo-enhancer
+# TODO Enhancer
 
 ![Build](https://github.com/asadsq/jb-todo-enhancer/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Adjust the [group](./gradle.properties), as well as the [id](./src/main/resources/META-INF/plugin.xml), [name](./src/main/resources/META-INF/plugin.xml), and [sources package](./src/main/kotlin).
-- [ ] Adjust the plugin [description](./src/main/resources/META-INF/plugin.xml) (see [Tips][docs:plugin-description]) and this README to describe what your plugin does.
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the `MARKETPLACE_ID` in the above README badges. You can obtain it once the plugin is published to JetBrains Marketplace.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
+<!-- Plugin description -->
+**TODO Enhancer** supercharges the way you track `TODO` and `FIXME` comments in your project.
 
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+On top of IntelliJ's built-in TODO index, it adds a dedicated **tool window** that understands
+structured metadata written directly in your comments:
+
+| Metadata  | Syntax                        | Example                                     |
+|-----------|-------------------------------|---------------------------------------------|
+| Assignee  | `@name` or `TODO(name)`       | `// TODO(@asad) fix the parser`             |
+| Priority  | `!p1`..`!p3`, `!high`/`!low`  | `// TODO !p1 ship this first`               |
+| Tags      | `#tag`                        | `// TODO #backend #perf tighten the query`  |
+| Due date  | `due:YYYY-MM-DD`              | `// TODO due:2026-07-10 finalize notes`     |
+
+Put it together and a single comment carries everything:
+
+```kotlin
+// TODO(@asad) !p1 #backend due:2026-07-10 - refactor the query builder
+```
+
+From the tool window you can **sort and filter** every TODO by type, priority, assignee, tag, or
+free text, filter to just your own with **Only mine**, and **double-click (or press Enter)** to jump
+straight to the code. Plain `// TODO` comments keep working exactly as before — all metadata is
+optional.
+<!-- Plugin description end -->
 
 ## Installation
 
 - Using the IDE built-in plugin system:
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "jb-todo-enhancer"</kbd> >
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "TODO Enhancer"</kbd> >
   <kbd>Install</kbd>
-
-- Using JetBrains Marketplace:
-
-  Go to [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID) and install it by clicking the <kbd>Install to ...</kbd> button in case your IDE is running.
-
-  You can also download the [latest release](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID/versions) from JetBrains Marketplace and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
 - Manually:
 
   Download the [latest release](https://github.com/asadsq/jb-todo-enhancer/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
+## Usage
+
+1. Open the **TODO Enhancer** tool window (bottom tool window stripe).
+2. It lists every TODO/FIXME in the project. Click a column header to sort; use the filters to narrow
+   by text, type, priority, or assignee.
+3. Double-click a row (or select it and press <kbd>Enter</kbd>) to navigate to the comment.
+
+## Development
+
+```sh
+./gradlew test          # run unit + platform tests
+./gradlew runIde        # launch a sandbox IDE with the plugin installed
+./gradlew buildPlugin   # produce build/distributions/*.zip
+./gradlew verifyPlugin  # run the JetBrains Plugin Verifier
+```
+
+## Publishing
+
+See [PUBLISHING.md](./PUBLISHING.md) for the full end-to-end guide to releasing on the JetBrains Marketplace.
 
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template
-[docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation

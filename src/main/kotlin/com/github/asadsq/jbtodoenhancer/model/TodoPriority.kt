@@ -1,3 +1,8 @@
+/*
+ * Enum of TODO priority levels (P1, P2, P3, NONE) with a numeric rank used for sorting,
+ * where NONE sorts last. The `fromToken` factory maps user-written tokens such as
+ * `p1`, `high`, or `low` to the matching level.
+ */
 package com.github.asadsq.jbtodoenhancer.model
 
 /**

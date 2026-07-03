@@ -1,4 +1,10 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<!--
+    Plugin descriptor declaring the plugin id, name, vendor, Marketplace description, and
+    its dependency on the core IntelliJ platform module. Registers the
+    messages.TodoEnhancerBundle resource bundle and the bottom-anchored "TODO Enhancer"
+    tool window backed by TodoEnhancerToolWindowFactory.
+-->
 <idea-plugin>
     <id>com.github.asadsq.jbtodoenhancer</id>
     <name>TODO Enhancer</name>

@@ -1,3 +1,9 @@
+/*
+ * Gradle settings script that names the root project and pins the versions of the Kotlin,
+ * changelog, foojay toolchain resolver, and IntelliJ Platform settings plugins. Also
+ * configures dependency resolution to use Maven Central plus the default JetBrains
+ * IntelliJ Platform repositories.
+ */
 import org.jetbrains.intellij.platform.gradle.extensions.intellijPlatform
 
 rootProject.name = "jb-todo-enhancer"

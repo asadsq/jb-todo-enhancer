@@ -1,3 +1,8 @@
+/*
+ * JUnit 4 unit tests for `TodoMetadataParser`, covering each metadata token (assignee,
+ * priority, tags, due date) individually and in combination. Also exercises edge cases
+ * such as invalid dates and email addresses that must not be mistaken for assignees.
+ */
 package com.github.asadsq.jbtodoenhancer.parser
 
 import com.github.asadsq.jbtodoenhancer.model.TodoPriority

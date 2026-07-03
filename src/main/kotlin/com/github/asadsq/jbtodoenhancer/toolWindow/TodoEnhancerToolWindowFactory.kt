@@ -1,3 +1,8 @@
+/*
+ * Factory registered in plugin.xml that builds the "TODO Enhancer" tool window when the
+ * IDE first opens it. Creates a `TodoEnhancerPanel` tied to the tool window's disposable
+ * so its listeners are cleaned up automatically.
+ */
 package com.github.asadsq.jbtodoenhancer.toolWindow
 
 import com.intellij.icons.AllIcons

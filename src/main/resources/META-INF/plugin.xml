@@ -14,14 +14,14 @@
         <p>On top of IntelliJ's built-in TODO index, it adds a dedicated tool window that understands
         structured metadata written directly in your comments:</p>
         <ul>
-            <li><b>Assignees</b> &mdash; <code>// TODO(@asad) fix the parser</code></li>
-            <li><b>Priorities</b> &mdash; <code>// TODO !p1 ship this first</code></li>
-            <li><b>Tags</b> &mdash; <code>// TODO #backend #perf tighten the query</code></li>
-            <li><b>Due dates</b> &mdash; <code>// TODO due:2026-07-10 finalize release notes</code></li>
+            <li><b>Assignees</b> — <code>// TODO(@asad) fix the parser</code></li>
+            <li><b>Priorities</b> — <code>// TODO !p1 ship this first</code></li>
+            <li><b>Tags</b> — <code>// TODO #backend #perf tighten the query</code></li>
+            <li><b>Due dates</b> — <code>// TODO due:2026-07-10 finalize release notes</code></li>
         </ul>
         <p>The tool window lets you sort and filter every TODO by type, priority, assignee, tag, or free
         text, and jump straight to the code with a double-click. Plain <code>// TODO</code> comments keep
-        working exactly as before &mdash; metadata is entirely optional.</p>
+        working exactly as before — metadata is entirely optional.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>

@@ -10,6 +10,9 @@ import com.github.asadsq.jbtodoenhancer.TodoEnhancerBundle
 import com.github.asadsq.jbtodoenhancer.model.TodoEntry
 import com.github.asadsq.jbtodoenhancer.model.TodoPriority
 import com.github.asadsq.jbtodoenhancer.services.TodoScanService
+import com.github.asadsq.jbtodoenhancer.ui.PriorityBadgeRenderer
+import com.github.asadsq.jbtodoenhancer.ui.RoundedButton
+import com.github.asadsq.jbtodoenhancer.ui.RoundedPanel
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ModalityState
@@ -32,16 +35,17 @@ import com.intellij.util.concurrency.AppExecutorUtil
 import com.intellij.util.ui.ColumnInfo
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.ListTableModel
+import java.awt.BorderLayout
 import java.awt.FlowLayout
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.util.concurrent.Callable
-import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
+import javax.swing.table.TableCellRenderer
 
 /**
  * Tool window content: a filterable, sortable table of all TODOs in the project.
@@ -70,7 +74,7 @@ class TodoEnhancerPanel(
 
     init {
         toolbar = buildToolbar()
-        setContent(JBScrollPane(table))
+        setContent(buildContent())
 
         typeCombo.addItem(ALL_TYPES)
         typeCombo.selectedItem = ALL_TYPES
@@ -79,20 +83,41 @@ class TodoEnhancerPanel(
         refresh()
     }
 
+    private fun buildContent(): JPanel {
+        table.rowHeight = JBUI.scale(30)
+        table.setShowGrid(false)
+        table.intercellSpacing = JBUI.emptySize()
+        table.tableHeader.reorderingAllowed = false
+
+        val scrollPane = JBScrollPane(table).apply {
+            border = JBUI.Borders.empty()
+        }
+        // A little breathing room so the table reads as its own panel below the toolbar card.
+        return JPanel(BorderLayout()).apply {
+            border = JBUI.Borders.empty(0, 8, 8, 8)
+            add(scrollPane, BorderLayout.CENTER)
+        }
+    }
+
     private fun buildToolbar(): JPanel {
-        val refreshButton = JButton(TodoEnhancerBundle["action.refresh.text"], AllIcons.Actions.Refresh).apply {
+        val refreshButton = RoundedButton(TodoEnhancerBundle["action.refresh.text"], AllIcons.Actions.Refresh).apply {
             addActionListener { refresh() }
         }
         searchField.textEditor.emptyText.text = TodoEnhancerBundle["filter.search.hint"]
 
-        return JPanel(FlowLayout(FlowLayout.LEFT, JBUI.scale(6), JBUI.scale(4))).apply {
-            border = JBUI.Borders.empty(2, 4)
+        val card = RoundedPanel(FlowLayout(FlowLayout.LEFT, JBUI.scale(8), JBUI.scale(6))).apply {
+            border = JBUI.Borders.empty(6, 10)
             add(refreshButton)
             add(searchField)
             add(typeCombo)
             add(priorityCombo)
             add(mineCheck)
             add(statusLabel)
+        }
+        // Outer wrapper adds a margin so the card's rounded corners have room to show.
+        return JPanel(BorderLayout()).apply {
+            border = JBUI.Borders.empty(8, 8, 4, 8)
+            add(card, BorderLayout.CENTER)
         }
     }
 
@@ -197,8 +222,15 @@ class TodoEnhancerPanel(
         const val ANY_PRIORITY = "Any priority"
         const val REFRESH_DELAY_MS = 800
 
+        private val priorityBadgeRenderer = PriorityBadgeRenderer()
+
         fun buildColumns(): Array<ColumnInfo<TodoEntry, *>> = arrayOf(
-            column(TodoEnhancerBundle["column.priority"], { it.priority.label }, compareBy { it.priority.rank }),
+            column(
+                TodoEnhancerBundle["column.priority"],
+                { it.priority.label },
+                compareBy { it.priority.rank },
+                renderer = priorityBadgeRenderer,
+            ),
             column(TodoEnhancerBundle["column.type"], { it.type }, compareBy { it.type }),
             column(TodoEnhancerBundle["column.assignee"], { it.assignee ?: "" }, compareBy { it.assignee ?: "" }),
             column(TodoEnhancerBundle["column.tags"], { it.tagsText }, compareBy { it.tagsText }),
@@ -213,9 +245,11 @@ class TodoEnhancerPanel(
             name: String,
             value: (TodoEntry) -> String,
             comparator: Comparator<TodoEntry>,
+            renderer: TableCellRenderer? = null,
         ): ColumnInfo<TodoEntry, String> = object : ColumnInfo<TodoEntry, String>(name) {
             override fun valueOf(item: TodoEntry): String = value(item)
             override fun getComparator(): Comparator<TodoEntry> = comparator
+            override fun getRenderer(item: TodoEntry?): TableCellRenderer? = renderer
         }
     }
 }

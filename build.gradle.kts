@@ -1,3 +1,9 @@
+/*
+ * Gradle build script wiring the Kotlin JVM (Java 21 toolchain) and IntelliJ Platform
+ * Gradle plugins to build the plugin against IntelliJ IDEA 2025.2. Also configures plugin
+ * signing and Marketplace publishing from environment variables, plugin verification,
+ * and the changelog plugin.
+ */
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 plugins {

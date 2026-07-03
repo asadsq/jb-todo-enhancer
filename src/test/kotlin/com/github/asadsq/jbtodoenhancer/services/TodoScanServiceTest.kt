@@ -1,3 +1,9 @@
+/*
+ * Platform-level test (`BasePlatformTestCase`) that runs `TodoScanService.scan()` against
+ * in-memory Java files in a headless IDE fixture. Verifies that TODO/FIXME comments are
+ * indexed, metadata is parsed into `TodoEntry` fields, and files without TODOs yield an
+ * empty list.
+ */
 package com.github.asadsq.jbtodoenhancer.services
 
 import com.github.asadsq.jbtodoenhancer.model.TodoEntry

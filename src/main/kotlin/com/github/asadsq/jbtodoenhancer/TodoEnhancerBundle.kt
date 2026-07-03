@@ -1,3 +1,8 @@
+/*
+ * Provides access to localized UI strings via IntelliJ's DynamicBundle, backed by
+ * messages/TodoEnhancerBundle.properties. Exposes `get`, `message`, and `messagePointer`
+ * helpers so UI code can look up display text by property key.
+ */
 package com.github.asadsq.jbtodoenhancer
 
 import com.intellij.DynamicBundle

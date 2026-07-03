@@ -1,3 +1,9 @@
+/*
+ * Project-level service that collects every TODO occurrence using IntelliJ's built-in TODO
+ * index (`PsiTodoSearchHelper`) and enriches each one via `TodoMetadataParser`. Produces
+ * `TodoEntry` objects with project-relative paths, 1-based line numbers, and character
+ * offsets; `scan()` must run inside a read action.
+ */
 package com.github.asadsq.jbtodoenhancer.services
 
 import com.github.asadsq.jbtodoenhancer.model.TodoEntry

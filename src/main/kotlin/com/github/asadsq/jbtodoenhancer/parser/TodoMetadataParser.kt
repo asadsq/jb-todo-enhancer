@@ -1,3 +1,8 @@
+/*
+ * Regex-based parser that converts raw TODO comment text into a `ParsedTodo` holding the
+ * type, assignee, priority, tags, due date, and cleaned description. All metadata tokens
+ * are optional and order-independent, and malformed values are ignored gracefully.
+ */
 package com.github.asadsq.jbtodoenhancer.parser
 
 import com.github.asadsq.jbtodoenhancer.model.TodoPriority

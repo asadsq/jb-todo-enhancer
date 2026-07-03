@@ -1,3 +1,8 @@
+/*
+ * Immutable data class representing a single TODO found in the project, combining parsed
+ * metadata (type, assignee, priority, tags, due date) with its file location. Includes
+ * derived display properties (`location`, `tagsText`) consumed by the tool window table.
+ */
 package com.github.asadsq.jbtodoenhancer.model
 
 import com.intellij.openapi.vfs.VirtualFile

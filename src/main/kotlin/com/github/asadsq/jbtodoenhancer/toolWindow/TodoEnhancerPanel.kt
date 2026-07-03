@@ -1,3 +1,9 @@
+/*
+ * Swing UI for the tool window: a sortable `TableView` of `TodoEntry` rows with toolbar
+ * filters for free text, type, priority, and "only mine". Fetches data from
+ * `TodoScanService` on a background read action and auto-refreshes with a debounce
+ * whenever the PSI tree changes.
+ */
 package com.github.asadsq.jbtodoenhancer.toolWindow
 
 import com.github.asadsq.jbtodoenhancer.TodoEnhancerBundle

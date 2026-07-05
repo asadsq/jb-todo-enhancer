@@ -60,6 +60,8 @@ class TodoEnhancerPanel(
     private var allEntries: List<TodoEntry> = emptyList()
 
     init {
+        // A portrait, sticky-note-ish hint for the initial floating-window size.
+        preferredSize = JBUI.size(340, 460)
         toolbar = buildToolbar()
         setContent(buildContent())
 
